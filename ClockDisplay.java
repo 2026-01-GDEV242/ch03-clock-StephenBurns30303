@@ -2,8 +2,11 @@
 /**
  * The ClockDisplay class implements a digital clock display for a
  * European-style 24 hour clock. The clock shows hours and minutes. The 
- * range of the clock is 00:00 (midnight) to 23:59 (one minute before 
- * midnight).
+ * range of the clock is 12:00 AM (midnight) to 11:59 (one minute before 
+ * noon). 12:00PM (noon to 11:59PM (one minute before midnight).
+ * 
+ * The numberDisplay stores values from 0-11.  When the Hours number display is zero, the clock Display should show 12 but not change the internal value of the hours numberDisplay.
+ * It is the job of the clock display to keep track of AM to PM and PM to AM tranistions. when the clock is initialized with the zero parameter constructor the time should read 12:00 AM
  * 
  * The clock display receives "ticks" (via the timeTick method) every minute
  * and reacts by incrementing the display. This is done in the usual clock
