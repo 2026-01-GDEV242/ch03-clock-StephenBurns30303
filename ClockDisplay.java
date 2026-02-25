@@ -1,7 +1,7 @@
 
 /**
  * The ClockDisplay class implements a digital clock display for a
- * American-style 12 hour clock. The clock shows hours and minutes and meridian. Theinternal
+ * American-style 12 hour clock. The clock shows hours and minutes and meridian. The internal
  * range of the clock is 00:00 (midnight) to 23:59 (one minute before 
  * midnight). The clock display is responsible for converting this to the US style.
  * 
@@ -10,13 +10,14 @@
  * fashion: the hour increments when the minutes roll over to zero.
  * 
  * @author Stephen M. Burns
- * @version 2016.02.29
+ * @version 2026.02.25
  */
 public class ClockDisplay
 {
     private NumberDisplay hours;
     private NumberDisplay minutes;
     private String displayString;    // simulates the actual display
+    private String meridians;
     
     /**
      * Constructor for ClockDisplay objects. This constructor 
@@ -26,6 +27,7 @@ public class ClockDisplay
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
+        meridians = "AM";
         updateDisplay();
     }
 
@@ -34,11 +36,12 @@ public class ClockDisplay
      * creates a new clock set at the time specified by the 
      * parameters.
      */
-    public ClockDisplay(int hour, int minute)
+    public ClockDisplay(int hour, int minute, String meridian)
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
-        setTime(hour, minute);
+        meridians=meridian;
+        setTime(hour, minute, meridian);
     }
 
     /**
@@ -48,9 +51,28 @@ public class ClockDisplay
     public void timeTick()
     {
         minutes.increment();
-        if(minutes.getValue() == 0) {  // it just rolled over!
+        
+        if(minutes.getValue() == 0) 
+        {  // it just rolled over!
             hours.increment();
         }
+        
+        if(hours.getValue()%12==0)
+        {
+            if(meridians=="AM")
+            {
+                meridians="PM";
+            }
+            else if(meridians=="PM")
+            {
+                meridians="AM";
+            }
+            else
+            {
+                System.out.println("The meridian value is incorrect");
+            }
+        }
+        
         updateDisplay();
     }
 
@@ -58,10 +80,11 @@ public class ClockDisplay
      * Set the time of the display to the specified hour and
      * minute.
      */
-    public void setTime(int hour, int minute)
+    public void setTime(int hour, int minute, String meridian)
     {
         hours.setValue(hour);
         minutes.setValue(minute);
+        meridians=meridian;
         updateDisplay();
     }
 
@@ -79,6 +102,6 @@ public class ClockDisplay
     private void updateDisplay()
     {
         displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue();
+                        minutes.getDisplayValue() + " " + meridians;
     }
 }
