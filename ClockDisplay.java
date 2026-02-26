@@ -23,7 +23,7 @@ public class ClockDisplay
     
     /**
      * Constructor for ClockDisplay objects. This constructor 
-     * creates a new clock set at 00:00.
+     * creates a new clock set at 12:00AM.
      */
     public ClockDisplay()
     {
