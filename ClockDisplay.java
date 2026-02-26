@@ -16,6 +16,8 @@ public class ClockDisplay
 {
     private NumberDisplay hours;
     private NumberDisplay minutes;
+    private NumberDisplay americanHours;
+    
     private String displayString;    // simulates the actual display
     private String meridians;
     
@@ -54,22 +56,20 @@ public class ClockDisplay
         
         if(minutes.getValue() == 0) 
         {  // it just rolled over!
+            
             hours.increment();
-        }
-        
-        if(hours.getValue()%12==0)
-        {
-            if(meridians=="AM")
+            
+            if(hours.getValue()%12==0)
             {
-                meridians="PM";
-            }
-            else if(meridians=="PM")
-            {
-                meridians="AM";
-            }
-            else
-            {
-                System.out.println("The meridian value is incorrect");
+                if(meridians=="AM")
+                {
+                    meridians="PM";
+                }
+                else
+                {
+                    meridians="AM";
+                }
+
             }
         }
         
@@ -101,7 +101,17 @@ public class ClockDisplay
      */
     private void updateDisplay()
     {
-        displayString = hours.getDisplayValue() + ":" + 
+        
+        americanHours= new NumberDisplay(24);
+        americanHours.setValue(hours.getValue()%12);
+        
+        if(americanHours.getValue()%12==0)
+        {
+            americanHours.setValue(12);
+        }
+        
+        
+        displayString = americanHours.getDisplayValue() + ":" + 
                         minutes.getDisplayValue() + " " + meridians;
     }
 }
