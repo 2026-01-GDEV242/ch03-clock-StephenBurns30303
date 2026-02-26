@@ -24,11 +24,11 @@ public class ClockDisplay
     
     /**
      * Constructor for ClockDisplay objects. This constructor 
-     * creates a new clock set at 00:00.
+     * creates a new clock set at 01:00AM.
      */
     public ClockDisplay()
     {
-        hours = new NumberDisplay(12);
+        hours = new NumberDisplay(13);
         minutes = new NumberDisplay(60);
         meridians="AM";
         updateDisplay();
@@ -41,7 +41,7 @@ public class ClockDisplay
      */
     public ClockDisplay(int hour, int minute, String meridian)
     {
-        hours = new NumberDisplay(12);
+        hours = new NumberDisplay(13);
         minutes = new NumberDisplay(60);
         meridians= meridian;
         setTime(hour, minute, meridian);
@@ -100,6 +100,11 @@ public class ClockDisplay
      */
     private void updateDisplay()
     {
+        if(hours.getValue()==0)
+        {
+            hours.setValue(1);
+        }
+        
         displayString = hours.getDisplayValue() + ":" + 
                         minutes.getDisplayValue() + " " + meridians;
     }
