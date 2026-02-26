@@ -12,8 +12,8 @@
  * and reacts by incrementing the display. This is done in the usual clock
  * fashion: the hour increments when the minutes roll over to zero.
  * 
- * @author Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Stephen M. Burns
+ * @version 2026.02.25
  */
 public class ClockDisplay
 {
